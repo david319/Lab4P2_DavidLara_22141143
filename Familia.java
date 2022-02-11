@@ -4,11 +4,11 @@ public class Familia {
     protected String apellido;
 
 
-    public Familia(String apellido){
+    public Familia(String apellido) {
         this.apellido = apellido;
     }
 
-    public String getApellido(){
+    public String getApellido() {
         return apellido;
     }
 
@@ -16,7 +16,7 @@ public class Familia {
         aldeano.setApellido(apellido);
     }
 
-    public String toString(){
+    public String toString() {
         return "Familia " + apellido;
     }
 }

@@ -42,7 +42,7 @@ public class Aldeano {
 
         public Herrero(String nombre, String apellido, int edad, int vida) {
             super(nombre, apellido, edad, vida);
-            super.vida = (int) (vida +(vida * 0.5));
+            super.vida = (int) (vida + (vida * 0.5));
             ataque = (int) (Math.random() * 500) + 200;
         }
     }
@@ -68,11 +68,23 @@ public class Aldeano {
     public static class SuperGranjero extends Aldeano {
         int ataque;
 
-        public SuperGranjero(String nombre, String apellido, int edad, int vida){
+        public SuperGranjero(String nombre, String apellido, int edad, int vida) {
             super(nombre, apellido, edad, vida);
             super.vida = 1000;
             ataque = 1000;
         }
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public int getAtaque() {
+        return ataque;
     }
 
     public String toString() {

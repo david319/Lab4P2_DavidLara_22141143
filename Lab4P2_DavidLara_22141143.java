@@ -8,6 +8,11 @@ public class Lab4P2_DavidLara_22141143 {
         // Declaración de variables
         int option;
 
+        // iniciar familias por defecto
+        Familias.familiasDefault();
+        Aldeanos.aldeanosDefault();
+
+
         do {
             System.out.println("""
                     Menu de opciones
@@ -34,6 +39,7 @@ public class Lab4P2_DavidLara_22141143 {
                     break;
                 case 4:
                     System.out.println("Pelear");
+                    Pelea.Pelear();
                     break;
                 default:
                     System.out.println("Opción inválida");
