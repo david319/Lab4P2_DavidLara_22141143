@@ -75,6 +75,10 @@ public class Aldeano {
         }
     }
 
+    public String name() {
+        return nombre;
+    }
+
     public String getApellido() {
         return apellido;
     }

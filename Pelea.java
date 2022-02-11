@@ -2,13 +2,12 @@ import java.util.Scanner;
 
 public class Pelea {
     static Scanner leer = new Scanner(System.in);
-    String peleador2;
 
     public static void Pelear() {
         System.out.println("Ingrese la familia a pelear contra los Montesco:");
-        String familia = leer.next();
-        do {
+        String familia = leer.next().toUpperCase();
             Familias.randomFamilias(familia);
+            Familias.randomFamilias("Montesco");
             String peleador1 = Aldeanos.getAldeanos(familia);
             int vida1 = Aldeanos.getVida(peleador1);
             int ataque1 = Aldeanos.getAtaque(peleador1);
@@ -37,6 +36,17 @@ public class Pelea {
                     System.out.println(peleador1 + " ganado");
                     Aldeanos.Remove(peleador2);
                 }
+            } else if (ataque2 < vida1) {
+                vida1 = vida1 - ataque2;
+                System.out.println(peleador2 + " ataca a " + peleador1 + " y le quita " + ataque2 + " de vida");
+                System.out.println(peleador1 + " le quita " + ataque2 + " de vida");
+                if (vida1 <= 0) {
+                    System.out.println(peleador2 + " ganado");
+                    Aldeanos.Remove(peleador1);
+                } else if (vida2 <= 0) {
+                    System.out.println(peleador1 + " ganado");
+                    Aldeanos.Remove(peleador2);
+                }
             }
 
             if (Aldeanos.getAldeanos("MONTESCO").equals(null)) {
@@ -44,8 +54,6 @@ public class Pelea {
             } else if (Aldeanos.getAldeanos(familia).equals(null)) {
                 System.out.println("La familia " + "MONTESCO" + " a ganado");
             }
-
-        } while (Aldeanos.getAldeanos("MONTESCO") != null || Aldeanos.getAldeanos(familia) != null);
     }
 
 }

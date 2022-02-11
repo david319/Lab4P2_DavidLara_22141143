@@ -80,7 +80,7 @@ public class Aldeanos extends Familias {
     public static String getAldeanos(String familia) {
         for (int i = 0; i < aldeanos.size(); i++) {
             if (Objects.equals(aldeanos.get(i).getApellido(), familia)) {
-                System.out.println(aldeanos.get(0).toString());
+                aldeanos.get(i).toString();
             }
         }
         return familia;
@@ -92,16 +92,18 @@ public class Aldeanos extends Familias {
                 return aldeanos.get(i).getVida();
             }
         }
-        return 0;
+        return aldeanos.get(0).getVida();
     }
 
     public static int getAtaque(String peleador1) {
         for (int i = 0; i < aldeanos.size(); i++) {
             if (Objects.equals(aldeanos.get(i).getApellido(), peleador1)) {
                 return aldeanos.get(i).getAtaque();
+            } else {
+                return 0;
             }
         }
-        return 0;
+        return aldeanos.get(0).getAtaque();
     }
 
     public static void Remove(String peleador1) {
