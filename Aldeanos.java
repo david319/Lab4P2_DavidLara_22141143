@@ -3,8 +3,9 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Aldeanos extends Familias {
-    static ArrayList<Aldeano> aldeanos = new ArrayList<>();
+    protected static ArrayList<Aldeano> aldeanos = new ArrayList<>();
     static Scanner leer = new Scanner(System.in);
+
 
     public static void crearAldeano() {
         System.out.println("Ingrese el nombre:");
@@ -29,87 +30,57 @@ public class Aldeanos extends Familias {
             if (option == 1) {
                 Aldeano aldeano = new Aldeano.Normal(name, lastName, age, health);
                 aldeanos.add(aldeano);
-                familias.get(0).add(aldeano);
             } else if (option == 2) {
                 System.out.println("Ingrese el discurso de paz:");
                 String peaceSpeech = leer.next();
                 Aldeano aldeano = new Aldeano.Pacifista(name, lastName, age, health, peaceSpeech);
                 aldeanos.add(aldeano);
-                familias.get(0).add(aldeano);
             } else if (option == 3) {
                 Aldeano aldeano = new Aldeano.Herrero(name, lastName, age, health);
                 aldeanos.add(aldeano);
-                familias.get(0).add(aldeano);
             } else if (option == 4) {
                 Aldeano aldeano = new Aldeano.Agronomo(name, lastName, age, health);
                 aldeanos.add(aldeano);
-                familias.get(0).add(aldeano);
-            }
-        } else {
-            System.out.println("El apellido no coincide con ninguna familia");
-        }
-    }
-
-    public static void aldeanosDefault() {
-        Aldeano Romeo = new Aldeano.SuperGranjero("Romeo", "MONTESCO", 20, 1000);
-        Aldeano Kevin = new Aldeano.Herrero("Kevin", "MONTESCO", 20, 500);
-        Aldeano Mario = new Aldeano.Agronomo("Mario", "MONTESCO", 20, 300);
-        Aldeano Julieta = new Aldeano.Normal("Julieta", "CAPULETO", 20, 1000);
-        Aldeano Luis = new Aldeano.Agronomo("Luis", "CAPULETO", 20, 450);
-        Aldeano Maria = new Aldeano.Pacifista("Maria", "CAPULETO", 20, 250, "Sea paz amigos");
-        Aldeano Juan = new Aldeano.Normal("Juan", "PEREZ", 20, 300);
-        Aldeano Marco = new Aldeano.Pacifista("Marco", "PEREZ", 20, 250, "No me molestes");
-        aldeanos.add(Romeo);
-        familias.get(0).add(Romeo);
-        aldeanos.add(Kevin);
-        familias.get(0).add(Kevin);
-        aldeanos.add(Mario);
-        familias.get(0).add(Mario);
-        aldeanos.add(Julieta);
-        familias.get(0).add(Julieta);
-        aldeanos.add(Luis);
-        familias.get(0).add(Luis);
-        aldeanos.add(Maria);
-        familias.get(0).add(Maria);
-        aldeanos.add(Juan);
-        familias.get(0).add(Juan);
-        aldeanos.add(Marco);
-        familias.get(0).add(Marco);
-    }
-
-    public static String getAldeanos(String familia) {
-        for (int i = 0; i < aldeanos.size(); i++) {
-            if (Objects.equals(aldeanos.get(i).getApellido(), familia)) {
-                aldeanos.get(i).toString();
-            }
-        }
-        return familia;
-    }
-
-    public static int getVida(String peleador1) {
-        for (int i = 0; i < aldeanos.size(); i++) {
-            if (Objects.equals(aldeanos.get(i).getApellido(), peleador1)) {
-                return aldeanos.get(i).getVida();
-            }
-        }
-        return aldeanos.get(0).getVida();
-    }
-
-    public static int getAtaque(String peleador1) {
-        for (int i = 0; i < aldeanos.size(); i++) {
-            if (Objects.equals(aldeanos.get(i).getApellido(), peleador1)) {
-                return aldeanos.get(i).getAtaque();
             } else {
-                return 0;
+                System.out.println("El apellido no coincide con ninguna familia");
             }
         }
-        return aldeanos.get(0).getAtaque();
     }
 
-    public static void Remove(String peleador1) {
-        for (int i = 0; i < aldeanos.size(); i++) {
-            if (Objects.equals(aldeanos.get(i).getApellido(), peleador1)) {
-                aldeanos.remove(i);
+
+
+    public static void Atacar() {
+        Familias.randomFamilias("Montesco");
+        System.out.println("Ingrese el apellido de la familia a pelear:");
+        String familia = leer.next().toUpperCase();
+        Familias.randomFamilias(familia);
+        if (Familias.buscarFamilia(familia)) {
+            for (int i = 0; i < aldeanos.size(); i++) {
+                if (Objects.equals(aldeanos.get(i).getApellido(), familia)) {
+                    String aldeanoAtacar = aldeanos.get(i).getName();
+                    System.out.println(aldeanoAtacar);
+                    for (int j = 0; j < aldeanos.size(); j++) {
+                        String aldeanoAtacado = aldeanos.get(j).getName();
+                        System.out.println(aldeanoAtacado);
+                        if (Objects.equals(aldeanos.get(j).getApellido(), "MONTESCO")) {
+                            do {
+                                aldeanos.get(j).setVida(aldeanos.get(j).getVida() - aldeanos.get(i).getAtaque());
+                                System.out.println(aldeanoAtacar + " ataca a " + aldeanos.get(j).getName() + " haciéndole " + aldeanos.get(j).getAtaque() + " de daño" +
+                                        " dejándolo con " + aldeanos.get(j).getVida() + " de vida");
+                                System.out.println(aldeanoAtacado + " ataca a " + aldeanos.get(i).getName() + " haciéndole " + aldeanos.get(i).getAtaque() + " de daño" +
+                                        " dejándolo con " + aldeanos.get(i).getVida() + " de vida");
+                                aldeanos.get(i).setVida(aldeanos.get(i).getVida() - aldeanos.get(j).getAtaque());
+                            } while (aldeanos.get(j).getVida() > 0 && aldeanos.get(i).getVida() > 0);
+                            if (aldeanos.get(j).getVida() <= 0) {
+                                System.out.println(aldeanoAtacado + " ha muerto");
+                                aldeanos.remove(j);
+                            } else if (aldeanos.get(i).getVida() <= 0) {
+                                System.out.println(aldeanoAtacar + " ha muerto");
+                                aldeanos.remove(i);
+                            }
+                        }
+                    }
+                }
             }
         }
     }

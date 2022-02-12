@@ -1,10 +1,12 @@
+import java.util.Collection;
+
 public class Aldeano {
 
-    protected String nombre;
-    protected String apellido;
-    protected int edad;
-    protected int vida;
-    protected int ataque;
+    String nombre;
+    String apellido;
+    int edad;
+    int vida;
+    int ataque;
 
 
     public Aldeano(String nombre, String apellido, int edad, int vida) {
@@ -18,12 +20,18 @@ public class Aldeano {
         this.apellido = apellido;
     }
 
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public Collection<? extends Familia> getFamilias() {
+        return Familias.familias;
+    }
+
     public static class Normal extends Aldeano {
-        int ataque;
 
         public Normal(String nombre, String apellido, int edad, int vida) {
             super(nombre, apellido, edad, vida);
-            this.vida = vida;
             ataque = 10;
         }
     }
@@ -38,17 +46,15 @@ public class Aldeano {
     }
 
     public static class Herrero extends Aldeano {
-        int ataque;
 
         public Herrero(String nombre, String apellido, int edad, int vida) {
             super(nombre, apellido, edad, vida);
             super.vida = (int) (vida + (vida * 0.5));
-            ataque = (int) (Math.random() * 500) + 200;
+            ataque = (int) ((Math.random() * (500 - 200)) + 200);
         }
     }
 
     public static class Agronomo extends Aldeano {
-        int ataque;
 
         public Agronomo(String nombre, String apellido, int edad, int vida) {
             super(nombre, apellido, edad, vida);
@@ -57,7 +63,6 @@ public class Aldeano {
     }
 
     public static class Explosivo extends Aldeano {
-        int ataque;
 
         public Explosivo(String nombre, String apellido, int edad, int vida) {
             super(nombre, apellido, edad, vida);
@@ -66,7 +71,6 @@ public class Aldeano {
     }
 
     public static class SuperGranjero extends Aldeano {
-        int ataque;
 
         public SuperGranjero(String nombre, String apellido, int edad, int vida) {
             super(nombre, apellido, edad, vida);
@@ -75,7 +79,7 @@ public class Aldeano {
         }
     }
 
-    public String name() {
+    public String getName() {
         return nombre;
     }
 

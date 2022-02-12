@@ -10,8 +10,6 @@ public class Lab4P2_DavidLara_22141143 {
 
         // iniciar familias por defecto
         Familias.familiasDefault();
-        Aldeanos.aldeanosDefault();
-
 
         do {
             System.out.println("""

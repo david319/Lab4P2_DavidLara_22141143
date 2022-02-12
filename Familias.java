@@ -16,6 +16,14 @@ public class Familias {
         familias.add(familia);
     }
 
+    public static void getFamilia(String apellido){
+        for(Familia familia : familias){
+            if(familia.getApellido().equals(apellido)){
+                System.out.println(familia.toString());
+            }
+        }
+    }
+
     public static boolean buscarFamilia(String apellido){
         for(Familia familia : familias){
             if(familia.getApellido().equals(apellido)){
